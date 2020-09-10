@@ -61,6 +61,10 @@ def probability(a_side=256, b_side=256, hard=False):
         # to find collisions on _pairs_ of ports, each of which can
         # cover the entire port range.
         num_options *= num_options
+    # `p` also has a closed form expression: `((n-k)!)^2 / (n! (n-2k)!)`. 
+    # On its own his yields no computational advatange, but thanks to 
+    # Stirling, we can approximate it well with 
+    # `(n-k)^(2n-2k) / (n^n (n-2k)^(n-2k))`.
     p = 1.0
     for i in range(b_side):
         p *= (num_options-a_side-i)/(num_options-i)
